@@ -3,7 +3,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 
-public class UnitTest {
+public class VariableTest {
     @DisplayName("Check variable values are correct")
     @Test
     void learnTheVariablesValidCase() {
