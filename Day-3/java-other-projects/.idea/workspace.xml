@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d4d4ae01-e7d2-4d5c-a57b-75ab17e2a9b7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/exception/BadNumberException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/exception/NumDivider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/generics/GenericBox.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/generics/NormalBox.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/oop/Animal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/oop/GpsListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/oop/Tiger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/AnimalTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/GenericsTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/NumDividerTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Dividing2Num/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Dividing2Num/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Dividing2Num/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Dividing2Num/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Dividing2Num/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Dividing2Num/src/main/java/div/DividingTwoNum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Dividing2Num/src/test/java/DividingTwoNumTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Dividing2Num/target/classes/div/DividingTwoNum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Dividing2Num/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Dividing2Num/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Dividing2Num/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Dividing2Num/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Dividing2Num/target/test-classes/DividingTwoNumTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java-other-concepts/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java-other-concepts/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java-other-concepts/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java-other-concepts/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java-other-concepts/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java-other-concepts/src/main/java/oop/Animal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java-other-concepts/src/main/java/oop/GpsListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java-other-concepts/src/main/java/oop/Tiger.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java-other-concepts/src/test/java/AnimalTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../target/classes/clsobj/Car.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../target/classes/clsobj/Car.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../../target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../target/surefire-reports/BmwTests.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../target/surefire-reports/BmwTests.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../target/surefire-reports/CarTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../target/surefire-reports/CarTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../target/surefire-reports/TEST-BmwTests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../target/surefire-reports/TEST-BmwTests.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../target/surefire-reports/TEST-CarTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../target/surefire-reports/TEST-CarTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../target/test-classes/AddTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../target/test-classes/BmwTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../target/test-classes/BmwTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../target/test-classes/CarTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../target/test-classes/CarTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../target/test-classes/UnitTest.class" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="23GooPUEQM0th5JgMo9kSUCMqcu" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="RunManager" selected="JUnit.GenericsTests.testGenericBoxString">
+    <configuration name="GenericsTests.testGenericBoxString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-other-projects" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="GenericsTests" />
+      <option name="METHOD_NAME" value="testGenericBoxString" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GenericsTests.testNormalBox" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-other-projects" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="GenericsTests" />
+      <option name="METHOD_NAME" value="testNormalBox" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.GenericsTests.testGenericBoxString" />
+        <item itemvalue="JUnit.GenericsTests.testNormalBox" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d4d4ae01-e7d2-4d5c-a57b-75ab17e2a9b7" name="Changes" comment="" />
+      <created>1641369962067</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1641369962067</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
