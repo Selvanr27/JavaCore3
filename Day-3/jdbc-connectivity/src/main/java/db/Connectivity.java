@@ -15,6 +15,7 @@ public class Connectivity {
                 "root",
                 "password"
         );
+        System.out.println("----DB Connection Success !-----");
     }
 
     public Connection getConnection() {
