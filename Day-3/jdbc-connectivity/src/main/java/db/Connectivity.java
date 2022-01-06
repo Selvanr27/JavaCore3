@@ -11,7 +11,7 @@ public class Connectivity {
     public Connectivity() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:33060/java_backend_training_db",
+                "jdbc:mysql://localhost:3306/java_db",
                 "root",
                 "password"
         );
