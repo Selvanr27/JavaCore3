@@ -26,13 +26,21 @@ public class DbService {
     }
 
     // update query
-    public int update() {
-        return 0;
+    public int update() throws  SQLException {
+        String sql="update emp_info set emp_name='Tam',dob='1999-09-27' where emp_id=6";
+        PreparedStatement ps=connection.prepareStatement(sql);
+        int affected=ps.executeUpdate();
+        connection.commit();
+        return affected;
     }
 
     // delete query
-    public int delete() {
-        return 0;
+    public int delete() throws SQLException {
+        String sql="delete from emp_info where emp_id=60 ";
+        PreparedStatement ps=connection.prepareStatement(sql);
+        int affected=ps.executeUpdate();
+        connection.commit();
+        return affected;
     }
 
     // select query - reading the data from database
