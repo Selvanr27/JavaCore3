@@ -13,18 +13,21 @@ public class Main {
             Connectivity connectivity = new Connectivity();
 
             DbService service = new DbService(connectivity.getConnection());
-           /* int cnt = service.create(
-                    2,
-                    "pqr",
-                    Date.valueOf(LocalDate.now()),
-                    true
-            );
+//            int cnt = service.create(
+//                    7,
+//                    "klm",
+//                    Date.valueOf(LocalDate.now()),
+//                    true
+//            );
+//            if(cnt > 0) {
+//                System.out.println("Employee Created Successfully");
+//            }
 
-            if(cnt > 0) {
-                System.out.println("Employee Created Successfully");
-            }*/
-// service.find();
-service.findEmployeeByName("pqr");
+//            service.find();
+
+//            service.findEmployeeByName("abc");
+
+            service.txnDemo(6, "sel", Date.valueOf(LocalDate.now()), false, 100);
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
