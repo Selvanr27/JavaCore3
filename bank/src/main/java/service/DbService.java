@@ -1,5 +1,6 @@
 package service;
 import java.sql.*;
+import java.util.Scanner;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -41,27 +42,118 @@ public class DbService {
             Date dob = rs.getDate("crDt");
             boolean sts = rs.getBoolean("status");
 
-            System.out.println(" acc num : " + id + " amount : " + ammt+"Name " + nm + " dob : " + dob.toString() + " status : " + sts);
+            System.out.println(" acc num : " + id + " amount : " + ammt + "Name " + nm + " dob : " + dob.toString() + " status : " + sts);
         }
         connection.commit();
         rs.close();
     }
 
-   public void Displaybalance(int acNum) throws SQLException{
-        String sql="select amt,acHldNm from where acNum =?";
-       PreparedStatement ps2 = connection.prepareStatement(sql);
-       System.out.println("sql :"+sql);
-       ps2.setInt(1, acNum);
-       ResultSet rs = ps2.executeQuery();
-       while(rs.next()){
-           double ammt1 = rs.getDouble("amt");
-           String nm1 = rs.getString("acHldNm");
-           System.out.println("Name :"+ammt1+"  balance  :"+nm1);
+    public void Displaybalance(int acNum) throws SQLException {
+        String sql = "select amt,acHldNm from bank_account where acNum =?";
+        PreparedStatement ps2 = connection.prepareStatement(sql);
 
-       }
-       connection.commit();
-       rs.close();
-   }
+        ps2.setInt(1, acNum);
+        ResultSet rs = ps2.executeQuery();
+        while (rs.next()) {
+            double ammt1 = rs.getDouble("amt");
+            String nm1 = rs.getString("acHldNm");
+            System.out.println("Name :" + nm1 + "  balance  :" + ammt1);
+
+        }
+        connection.commit();
+        rs.close();
+    }
+
+    public void Withdrawamount(int acNum) throws SQLException {
+        String sql = "select amt,acHldNm from bank_account where acNum =?";
+        PreparedStatement ps2 = connection.prepareStatement(sql);
+
+        ps2.setInt(1, acNum);
+        ResultSet rs = ps2.executeQuery();
+        while (rs.next()) {
+            double ammt1 = rs.getDouble("amt");
+            String nm1 = rs.getString("acHldNm");
+            System.out.println("Amount :" + ammt1 + "  accHldName  :" + nm1);
+            var sc = new Scanner(System.in);
+            System.out.println("Enter Amount to withdraw : ");
+            int wamt = sc.nextInt();
+            if (wamt <= ammt1) {
+
+                String sql1 = "update bank_account set amt=? where acHldNm=?";
+                PreparedStatement ps3 = connection.prepareStatement(sql1);
+                ps3.setDouble(1, ammt1 - wamt);
+                ps3.setString(2, nm1);
+
+                int affected = ps3.executeUpdate();
+                connection.commit();
+                System.out.println("withdraw Successfull");
+
+
+            } else {
+                System.out.println("Insufficient Balance ");
+            }
+
+        }
+        connection.commit();
+        rs.close();
+    }
+
+    public void Depositamount(int acNum) throws SQLException {
+        String sql = "select amt,acHldNm from bank_account where acNum =?";
+        PreparedStatement ps2 = connection.prepareStatement(sql);
+
+        ps2.setInt(1, acNum);
+        ResultSet rs = ps2.executeQuery();
+        while (rs.next()) {
+            double ammt1 = rs.getDouble("amt");
+            String nm1 = rs.getString("acHldNm");
+            System.out.println("Amount :" + ammt1 + "  accHldName  :" + nm1);
+            var sc = new Scanner(System.in);
+            System.out.println("Enter Amount to Deposit : ");
+            int damt = sc.nextInt();
+            if (damt > 0) {
+
+                String sql1 = "update bank_account set amt=? where acHldNm=?";
+                PreparedStatement ps3 = connection.prepareStatement(sql1);
+                ps3.setDouble(1, ammt1 + damt);
+                ps3.setString(2, nm1);
+
+                int affected = ps3.executeUpdate();
+                connection.commit();
+                System.out.println("Deposit Successfull");
+
+
+            } else {
+                System.out.println("Please Enter Valid Amount ");
+            }
+
+        }
+        connection.commit();
+        rs.close();
+    }
+
+    public void Displaystatus(int acNum) throws SQLException {
+        String sql = "select status,acHldNm from bank_account where acNum =?";
+        PreparedStatement ps2 = connection.prepareStatement(sql);
+
+        ps2.setInt(1, acNum);
+        ResultSet rs = ps2.executeQuery();
+        while (rs.next()) {
+            boolean sts = rs.getBoolean("status");
+            String nm1 = rs.getString("acHldNm");
+           if (sts == false) {
+                System.out.println("Name :" + nm1 + "  Status  : Inactive");
+            } else {
+                System.out.println("Name :" + nm1 + "  Status  : Active");
+
+            }
+            System.out.println("Name :" + nm1 + "  Status  :"+sts);
+
+            connection.commit();
+
+        }
+
+    }
 
 
 

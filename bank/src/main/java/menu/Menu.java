@@ -55,6 +55,47 @@ public class Menu {
         System.out.println(Mainmenu());
         int ch1 = scanner.nextInt();
         if (ch1 == 3) System.exit(1);
+        if(ch1==2) {
+            while (true) {
+                System.out.println(Usermenu());
+                int ch3 = scanner.nextInt();
+                if (ch3 == 5) System.exit(1);
+                if(ch3==4){
+                    System.out.println("Enter Account Number : ");
+                    int acNum = scanner.nextInt();
+                    try {
+                        service.Depositamount(acNum);
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                if(ch3==3) {
+                    System.out.println("Enter Account Number : ");
+                    int acNum = scanner.nextInt();
+                    try {
+                        service.Withdrawamount(acNum);
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                    if(ch3==1){
+                        System.out.println("Enter Account Number : ");
+                        int acNum = scanner.nextInt();
+                        try {
+                            service.Displaybalance(acNum);
+
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+
+            }
+        }
         if (ch1 == 1) {
 
            // var scanner = new Scanner(System.in);
@@ -79,7 +120,7 @@ public class Menu {
                                 amt,
                                 acHldNm,
                                 Date.valueOf(LocalDate.now()),
-                                false
+                                true
                         );
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -105,15 +146,42 @@ public class Menu {
                         e.printStackTrace();
                     }
                 }
+                if(ch==5) {
+                    System.out.println("Enter Account Number : ");
+                    int acNum = scanner.nextInt();
+                    try {
+                        service.Withdrawamount(acNum);
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                if(ch==6) {
+                    System.out.println("Enter Account Number : ");
+                    int acNum = scanner.nextInt();
+                    try {
+                        service.Depositamount(acNum);
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                if(ch==7){
+                    System.out.println("Enter Account Number : ");
+                    int acNum = scanner.nextInt();
+                    try {
+                        service.Displaystatus(acNum);
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+
             }
         }
-        if(ch1==2) {
-            while (true) {
-                System.out.println(Usermenu());
-                int ch3 = scanner.nextInt();
-                if (ch3 == 5) System.exit(1);
-            }
-        }
+
     }
 
 }
