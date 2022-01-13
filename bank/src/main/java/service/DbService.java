@@ -154,7 +154,38 @@ public class DbService {
         }
 
     }
+    /*still its pending
+    String sql = " update bank_account set amt=amount- ? where acNum = ?";
 
+    String sql1 = " update bank_account set amount=amount+ ? where account_num = ?";
+
+    PreparedStatement ps = connection.prepareStatement(sql);
+
+    PreparedStatement ps1 = connection.prepareStatement(sql1);
+
+ps.setInt(1, amt);
+
+ps.setInt(2, id);
+
+
+
+    Connectivity connectivity = new Connectivity();
+
+
+
+
+
+ps1.setInt(1, amt);
+
+ps1.setInt(2, id2);
+
+
+
+    int affected = ps.executeUpdate(); // actually firing the query
+
+    int affected1 = ps1.executeUpdate();
+
+System.out.println("Amount has bean Transfered ");*/
 
 
 }
