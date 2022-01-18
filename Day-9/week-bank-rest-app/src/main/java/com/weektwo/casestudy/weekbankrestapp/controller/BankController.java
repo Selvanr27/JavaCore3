@@ -130,18 +130,16 @@ public class BankController {
         }
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<AppResponse<Integer>>updateDetails(@RequestBody BankAccount ba){
-        return service.updateAccountDetails();
-    }
 
-    @GetMapping("/{acNum}")
-    public ResponseEntity<AppResponse<List<BankAccount>>> accountsStartWith(@PathVariable Long acNum) {
+
+    @GetMapping("/num/{acNum}")
+    public ResponseEntity<AppResponse<List<BankAccount>>> accountsStart(@PathVariable Long acNum) {
         var response = new AppResponse<List<BankAccount>>();
         response.setMsg("account list");
         response.setSts("success");
         response.setBody(service.findAccountByAcNum(acNum));
-
         return ResponseEntity.ok(response);
     }
+
+
 }

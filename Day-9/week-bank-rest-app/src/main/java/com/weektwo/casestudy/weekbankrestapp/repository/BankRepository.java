@@ -28,4 +28,6 @@ public interface BankRepository extends JpaRepository<BankAccount, Long> {
     default List<BankAccount> findByAccNum(Long acNum) {
         return null;
     }
+
+    List<BankAccount> findByAcNum(Long acNum);
 }

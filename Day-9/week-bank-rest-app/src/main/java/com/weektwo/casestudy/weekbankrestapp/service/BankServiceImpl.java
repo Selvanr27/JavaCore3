@@ -44,6 +44,12 @@ public class BankServiceImpl implements BankService{
         return null;
     }
 
+   /* @Override
+    public ResponseEntity<AppResponse<Integer>> updateAccountDetails(BankAccount baa) {
+        //return repository.findAll();
+        repository.updateDetails(baa);
+    }*/
+
     @Override
     public List<BankAccount> findAllBankAccounts() {
         return repository.findAll();
@@ -118,8 +124,7 @@ public class BankServiceImpl implements BankService{
 
     @Override
     public double deposit(Long acNum, double amt) throws InvalidAmountException {
-        // just explanation I am using this strategy
-        // it can be done in more efficient way
+
 
         if(amt <= 0) throw new InvalidAmountException("Amount Should be Non Zero Positive "+amt);
 
@@ -183,7 +188,8 @@ public class BankServiceImpl implements BankService{
 
     @Override
     public List<BankAccount> findAccountByAcNum(Long acNum) {
-        return repository.findByAccNum(acNum);
+
+        return repository.findByAcNum(acNum);
     }
 
 
