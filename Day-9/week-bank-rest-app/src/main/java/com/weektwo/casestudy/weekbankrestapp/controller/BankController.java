@@ -112,22 +112,28 @@ public class BankController {
         return service.findAllBankAccounts();
     }
 
-    @PutMapping("/transfer") // PUT -> http://localhost:8080/bank/transfer
-    public ResponseEntity<AppResponse<Double>> transferMoney(@RequestBody BankAccount ba) {
-        try {
-            double amt = service.transferMoney(ba.getAcNum(),ba.getAcNum(), ba.getBalance());
-            var response = new AppResponse<Double>();
-            response.setMsg("Transfer Successfully");
-            response.setSts("Success");
-            response.setBody(amt);
-            return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
-        } catch (InvalidAmountException e) {
-            var response = new AppResponse<Double>();
-            response.setMsg(e.getMessage());
-            response.setSts("fail");
+    @PutMapping("/transfer") // PUT -> http://localhost:8080/bank/transferpublic
+     ResponseEntity<AppResponse<Double>> transfer(@RequestBody BankAccount ba) {
+    try {
+        double amt = service.transferMoney(ba.getAcNum(), ba.getAcNum2(), ba.getBalance());
+        var response = new AppResponse<Double>();
+        if (amt == 0) {
+            response.setSts("fail : Account is DeActive");
             response.setBody(0.0);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        } else {
+
+            response.setMsg("money transfer successfully");
+            response.setSts("success");
+            response.setBody(amt);
+            return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
         }
+    } catch (InvalidAmountException e) {
+        var response = new AppResponse<Double>();
+        response.setMsg(e.getMessage());
+        response.setSts("fail");
+        response.setBody(0.0);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
 
