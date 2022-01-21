@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
+
 public class BillDto {
     private  long id;
     private String patientName;

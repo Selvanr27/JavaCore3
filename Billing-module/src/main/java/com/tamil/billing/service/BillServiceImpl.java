@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class BillServiceImpl implements BillService{
@@ -17,7 +16,8 @@ public class BillServiceImpl implements BillService{
     private BillRepository repository;
 
     @Override
-    public BillDto createBill(BillDto dto) {
+    public BillDto addBills(BillDto dto) {
+
 
         var bill = new Bill();
         bill.setId(dto.getId());
@@ -27,9 +27,32 @@ public class BillServiceImpl implements BillService{
         bill.setBillPaidDt(dto.getBillPaidDt());
         bill.setBillSts(dto.getBillSts());
         bill.setBillAmt(dto.getBillAmt());
-repository.save(bill);
+        repository.save(bill);
         return dto;
     }
+
+
+
+   /* @Override
+    public List<BillDto>getAllBills() {
+        List<Bill> bil = repository.getAllBills();
+        List<BillDto> dtos = new ArrayList<>();
+        for (int i = 0; i < bil.size(); i++) {
+            Bill bi = bil.get(i);
+            BillDto dto = new BillDto(
+                    bi.getId(),
+                    bi.getPatientName(),
+                    bi.getBillDt(),
+                    bi.getBillTreatment(),
+                    bi.getBillPaidDt(),
+                    bi.getBillSts(),
+                    bi.getBillAmt()
+            );
+            dtos.add(dto);
+        }
+        return dtos;
+
+    }*/
 
 
 }

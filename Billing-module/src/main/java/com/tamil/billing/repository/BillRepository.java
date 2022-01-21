@@ -36,6 +36,7 @@ public interface BillRepository extends JpaRepository<Bill, Long> {
 
 
 import com.tamil.billing.domain.Bill;
+import com.tamil.billing.dto.BillDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
