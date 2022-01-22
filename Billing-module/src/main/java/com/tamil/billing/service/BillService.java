@@ -1,7 +1,10 @@
 package com.tamil.billing.service;
 
 
+import com.tamil.billing.domain.Bill;
 import com.tamil.billing.dto.BillDto;
+
+import java.util.List;
 
 public interface BillService {
  //   Bill addBills(Bill bl);
@@ -25,4 +28,6 @@ public interface BillService {
     boolean paidBill(Long id);
 
     int updateBill(BillDto dto);
+
+    List<Bill> getAllBills();
 }

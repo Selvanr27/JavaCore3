@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.logging.Logger;
+
 
 
 
@@ -52,22 +52,14 @@ public class BillController {
 
     /*--------------------------Show All Bills-----------------------------------------*/
 
-   /* @GetMapping("/all")
-    public ResponseEntity<AppResponse<BillDto>>getAllBills(){
-        var response = new AppResponse<BillDto>();
-        try {
-            return service.getAllBills();
-           // return null;
-
-    }catch (InvalidBillException e) {
-
-        response.setMessage(e.getMessage());
-        response.setStatus("fail");
-        response.setBody(response.getBody());
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-
+    @GetMapping("/all")
+    public List<Bill>findAll()
+    {
+        return service.getAllBills();
     }
-    }*/
+
+
+
 
    /* @GetMapping("/{prefix}")
     public ResponseEntity<AppResponse<List<BillDto>>> accountsStartWith(@PathVariable String prefix) {
