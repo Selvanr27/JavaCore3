@@ -4,6 +4,7 @@ import com.tamil.billing.domain.Bill;
 import com.tamil.billing.dto.AppResponse;
 import com.tamil.billing.dto.BillDto;
 import com.tamil.billing.exception.InvalidBillException;
+import com.tamil.billing.exception.InvalidIdException;
 import com.tamil.billing.exception.InvalidPrefixException;
 import com.tamil.billing.exception.InvalidUpdateException;
 import com.tamil.billing.service.BillService;
@@ -24,7 +25,7 @@ public class BillController {
     @Autowired
     private BillService service;
 
-    /*--------------------------Create Bills-----------------------------------------*/
+    /*--------------------------<Create Bills>-----------------------------------------*/
 
 
     @PostMapping()
@@ -68,7 +69,7 @@ public class BillController {
     }
     }*/
 
-    @GetMapping("/{prefix}")
+   /* @GetMapping("/{prefix}")
     public ResponseEntity<AppResponse<List<BillDto>>> accountsStartWith(@PathVariable String prefix) {
         var response = new AppResponse<List<BillDto>>();
         try{
@@ -83,19 +84,39 @@ public class BillController {
        response.setBody(response.getBody());
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
-        }
+        }*/
     @PutMapping("/updatebill")
-    public ResponseEntity<AppResponse<Long>>billUpdate(@RequestBody BillDto dto) {
-        var response = new AppResponse<Long>();
+    public ResponseEntity<AppResponse<Integer>>updateBill(@RequestBody BillDto dto) {
+
+   var upBill=service.updateBill(dto);
+        var response = new AppResponse<Integer>();
         try {
-            Long idd = service.billUpdate(dto.getId(),dto.getBillAmt());
+
 
             response.setMessage("Bill Updated Successfully");
             response.setStatus("Success");
-            response.setBody(idd);
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            response.setBody(upBill);
+            return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
         } catch (InvalidUpdateException e) {
 
+            response.setMessage(e.getMessage());
+            response.setStatus("Fail");
+            response.setBody(response.getBody());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+/*-----------------------------<Mark Bill As Paid>-------------------------------*/
+    @PutMapping("/{Id}")
+    public ResponseEntity<AppResponse<Boolean>>paidBill(@PathVariable Long Id){
+        boolean paidBill=service.paidBill(Id);
+        var response=new AppResponse<Boolean>();
+        try{
+
+            response.setMessage("Successfully");
+            response.setStatus("Success");
+            response.setBody(paidBill);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }catch(InvalidIdException e){
             response.setMessage(e.getMessage());
             response.setStatus("Fail");
             response.setBody(response.getBody());

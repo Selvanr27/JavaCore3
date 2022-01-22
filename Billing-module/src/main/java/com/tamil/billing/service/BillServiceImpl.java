@@ -2,20 +2,20 @@ package com.tamil.billing.service;
 
 import com.tamil.billing.domain.Bill;
 import com.tamil.billing.dto.BillDto;
+import com.tamil.billing.exception.InvalidIdException;
 import com.tamil.billing.exception.InvalidUpdateException;
 import com.tamil.billing.repository.BillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BillServiceImpl implements BillService{
+public class BillServiceImpl implements BillService {
     @Autowired
     private BillRepository repository;
 
-    /*--------------------------Create Bills-----------------------------------------*/
+    /*--------------------------<Create Bills>-----------------------------------------*/
 
   /*  @Override
     public Bill addBills(Bill dto) {
@@ -33,7 +33,7 @@ public class BillServiceImpl implements BillService{
         return dto;
     }*/
 
-   @Override
+    @Override
     public BillDto addBills(BillDto dto) {
 
         var bill = new Bill();
@@ -53,7 +53,7 @@ public class BillServiceImpl implements BillService{
 
   /* @Override
     public ResponseEntity<AppResponse<BillDto>> getAllBills() {
-        List<Bill> bobj = repository.getAllBills();
+        List<Bill> bobj = repository.getAllBillsDetails();
         List<BillDto> bdtoj = new ArrayList<>();
         for (int i = 0; i < bobj.size(); i++) {
             Bill bobj2 = bobj.get(i);
@@ -75,29 +75,53 @@ public class BillServiceImpl implements BillService{
 
     /*--------------------------TreatmentWise Bill-----------------------------------------*/
 
+  /*  @Override
+    public List<BillDto> findByTreatment(String prefix) {
+
+
+        return repository.findByTreatmentName(prefix);
+
+    }*/
+
+
+
+    /*------------------------------Update Bill-----------------------------------------*/
+
 @Override
-public List<BillDto>findByTreatment(String prefix){
-    return repository.findByTreatmentName(prefix);
-}
+public int updateBill(BillDto dto) throws InvalidUpdateException{
+    Bill bill2=repository.findById(dto.getId()).orElseThrow(()->new InvalidUpdateException("Invalid Id"));
+    var bill3=new Bill();
 
+    bill3.setId(dto.getId());
+    bill3.setPatientName(dto.getPatientName());
+    bill3.setBillDt(dto.getBillDt());
+    bill3.setBillTreatment(dto.getBillTreatment());
+    bill3.setBillPaidDt(dto.getBillPaidDt());
+    bill3.setBillSts(dto.getBillSts());
+    bill3.setBillAmt(dto.getBillAmt());
 
-/*------------------------------Update Bill-----------------------------------------*/
-
-public Long billUpdate(Long billAmt, Long Id)throws InvalidUpdateException{
-
-    if (billAmt == 0) throw new InvalidUpdateException("Amount Should be Non Zero Positive " + billAmt);
-    Optional<Bill> op = repository.updateBillDetails(Id);
-   Bill baOld = op.orElseThrow();
-    double existingBalance = baOld.getBillAmt();
-    double newBalance = existingBalance +billAmt;
-    Bill baNew = new Bill();
-    baNew.setBillAmt((long) newBalance);
-    baNew.setPatientName(baOld.getPatientName());
-    baNew.setBillSts(baOld.getBillSts());
-    repository.save(baNew);
-    return baNew.getBillAmt();
+    repository.save(bill3);
+    return 1;
 
 }
 
+    /*-----------------------------<Mark Bill As Paid>-------------------------------*/
 
+    public boolean paidBill(Long Id) throws InvalidIdException{
+        Optional<Bill> ba=repository.findById(Id);
+        Bill oldBill=ba.orElseThrow(() -> new InvalidIdException("ID is Not Valid"));
+        boolean newSts=true;
+        Bill bill=new Bill();
+        bill.setId(oldBill.getId());
+        bill.setPatientName(oldBill.getPatientName());
+        bill.setBillDt(oldBill.getBillDt());
+        bill.setBillTreatment(oldBill.getBillTreatment());
+        bill.setBillPaidDt(oldBill.getBillPaidDt());
+        bill.setBillSts(oldBill.getBillSts());
+        bill.setBillAmt(oldBill.getBillAmt());
+
+        repository.save(bill);
+        return bill.getBillSts();
+
+    }
 }
