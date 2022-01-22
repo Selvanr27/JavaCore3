@@ -3,12 +3,12 @@ package com.tamil.billing.service;
 import com.tamil.billing.domain.Bill;
 import com.tamil.billing.dto.BillDto;
 import com.tamil.billing.exception.InvalidIdException;
-import com.tamil.billing.exception.InvalidUpdateException;
 import com.tamil.billing.repository.BillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -18,21 +18,7 @@ public class BillServiceImpl implements BillService {
 
     /*--------------------------<Create Bills>-----------------------------------------*/
 
-  /*  @Override
-    public Bill addBills(Bill dto) {
 
-
-        var bill = new Bill();
-        bill.setId(dto.getId());
-        bill.setPatientName(dto.getPatientName());
-        bill.setBillDt(dto.getBillDt());
-        bill.setBillTreatment(dto.getBillTreatment());
-        bill.setBillPaidDt(dto.getBillPaidDt());
-        bill.setBillSts(dto.getBillSts());
-        bill.setBillAmt(dto.getBillAmt());
-        repository.save(bill);
-        return dto;
-    }*/
 
     @Override
     public BillDto addBills(BillDto dto) {
@@ -94,8 +80,8 @@ public class BillServiceImpl implements BillService {
     /*------------------------------Update Bill-----------------------------------------*/
 
 @Override
-public int updateBill(BillDto dto) throws InvalidUpdateException{
-    Bill bill2=repository.findById(dto.getId()).orElseThrow(()->new InvalidUpdateException("Invalid Id"));
+public BillDto updateBill(BillDto dto) throws InvalidIdException{
+    Bill bill2=repository.findById(dto.getId()).orElseThrow(()->new InvalidIdException("Invalid Id"));
     var bill3=new Bill();
 
     bill3.setId(dto.getId());
@@ -107,7 +93,7 @@ public int updateBill(BillDto dto) throws InvalidUpdateException{
     bill3.setBillAmt(dto.getBillAmt());
 
     repository.save(bill3);
-    return 1;
+    return dto;
 
 }
 
@@ -123,11 +109,22 @@ public int updateBill(BillDto dto) throws InvalidUpdateException{
         bill.setBillDt(oldBill.getBillDt());
         bill.setBillTreatment(oldBill.getBillTreatment());
         bill.setBillPaidDt(oldBill.getBillPaidDt());
-        bill.setBillSts(oldBill.getBillSts());
-        bill.setBillAmt(oldBill.getBillAmt());
+        bill.setBillSts(newSts);
+       bill.setBillAmt(oldBill.getBillAmt());
 
         repository.save(bill);
         return bill.getBillSts();
 
     }
+
+    /*--------------------------------<Treatment Wise Bill>-------------------------------*/
+
+   @Override
+    public List <Map<String,Integer>>findTreatmentWiseAmount(){
+       return repository.findTreatmentWiseRepo();
+   }
+
 }
+
+
+

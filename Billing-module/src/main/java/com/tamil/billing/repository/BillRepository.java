@@ -43,6 +43,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface BillRepository extends JpaRepository<Bill, Long> {
@@ -52,6 +53,12 @@ public interface BillRepository extends JpaRepository<Bill, Long> {
 @Modifying
 @Query(value = "select u.Id from bill4 u where u.bill_treatment=?1",nativeQuery = true)
 List<BillDto> findByTreatmentName(String billTreatment);
+
+
+@Query(value = "select bill_treatment,sum(bill_amt) from bill4 group by bill_treatment",nativeQuery = true)
+List<Map<String,Integer>>findTreatmentWiseRepo();
+
+    //  List<BillDto> findByTreatmentNameWith(String prefix);
 
 /*@Modifying
     @Query(value = "update bill4 set bill_amt=:billAmt where id=:Id",nativeQuery = true)

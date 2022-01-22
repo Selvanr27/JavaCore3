@@ -3,10 +3,7 @@ package com.tamil.billing.controller;
 import com.tamil.billing.domain.Bill;
 import com.tamil.billing.dto.AppResponse;
 import com.tamil.billing.dto.BillDto;
-import com.tamil.billing.exception.InvalidBillException;
-import com.tamil.billing.exception.InvalidIdException;
-import com.tamil.billing.exception.InvalidPrefixException;
-import com.tamil.billing.exception.InvalidUpdateException;
+import com.tamil.billing.exception.*;
 import com.tamil.billing.service.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,9 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-
-
+import java.util.Map;
 
 
 @RequestMapping("/billing")
@@ -59,29 +54,33 @@ public class BillController {
     }
 
 
+    /*--------------------------Show TreatmentWise Bill-----------------------------------------*/
+@GetMapping("/treatment")
+public ResponseEntity<AppResponse<List<Map<String,Integer>>>>findTreatmentWise(){
+    var response=new AppResponse<List<Map<String,Integer>>>();
+    try{
+        response.setMessage("Treatment wise Amount");
+        response.setStatus("Success");
+        response.setBody(service.findTreatmentWiseAmount());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }catch(InvalidAmtException e){
+        response.setMessage(e.getMessage());
+        response.setStatus("Fail");
+        response.setBody(response.getBody());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+}
 
 
-   /* @GetMapping("/{prefix}")
-    public ResponseEntity<AppResponse<List<BillDto>>> accountsStartWith(@PathVariable String prefix) {
-        var response = new AppResponse<List<BillDto>>();
-        try{
-        response.setMessage("Bill list");
-        response.setStatus("success");
-        response.setBody(service.findByTreatment(prefix));
 
-            return new ResponseEntity<>(response, HttpStatus.OK);
-    }catch(InvalidPrefixException e) {
-       response.setMessage(e.getMessage());
-       response.setStatus("Fail");
-       response.setBody(response.getBody());
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-        }
-        }*/
-    @PutMapping("/updatebill")
-    public ResponseEntity<AppResponse<Integer>>updateBill(@RequestBody BillDto dto) {
+    /*--------------------------Update All Bills-----------------------------------------*/
+
+    @PutMapping("/update")
+    public ResponseEntity<AppResponse<BillDto>>updateBills(@RequestBody BillDto dto) {
 
    var upBill=service.updateBill(dto);
-        var response = new AppResponse<Integer>();
+        var response = new AppResponse<BillDto>();
         try {
 
 

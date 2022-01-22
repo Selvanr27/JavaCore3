@@ -3,8 +3,10 @@ package com.tamil.billing.service;
 
 import com.tamil.billing.domain.Bill;
 import com.tamil.billing.dto.BillDto;
+import com.tamil.billing.exception.InvalidIdException;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BillService {
  //   Bill addBills(Bill bl);
@@ -27,7 +29,11 @@ public interface BillService {
     /*-----------------------------<Mark Bill As Paid>-------------------------------*/
     boolean paidBill(Long id);
 
-    int updateBill(BillDto dto);
+    BillDto updateBill(BillDto dto) throws InvalidIdException;
 
     List<Bill> getAllBills();
+
+    List<Map<String, Integer>> findTreatmentWiseAmount();
+
+//    List<BillDto> billStartsWith(String prefix);
 }
