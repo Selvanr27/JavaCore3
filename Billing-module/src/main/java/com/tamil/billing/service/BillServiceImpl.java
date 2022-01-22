@@ -43,37 +43,6 @@ public class BillServiceImpl implements BillService {
         return repository.findAll();
     }
 
-  /* @Override
-    public ResponseEntity<AppResponse<BillDto>> getAllBills() {
-        List<Bill> bobj = repository.getAllBillsDetails();
-        List<BillDto> bdtoj = new ArrayList<>();
-        for (int i = 0; i < bobj.size(); i++) {
-            Bill bobj2 = bobj.get(i);
-            BillDto dtobj = new BillDto(
-                    bobj2.getId(),
-                     bobj2.getPatientName(),
-                    bobj2.getBillDt(),
-                     bobj2.getBillTreatment(),
-                     bobj2.getBillPaidDt(),
-                     bobj2.getBillSts(),
-                     bobj2.getBillAmt()
-            );
-            bdtoj.add(dtobj);
-        }
-        return (ResponseEntity<AppResponse<BillDto>>) bdtoj;
-
-    }*/
-
-
-    /*--------------------------TreatmentWise Bill-----------------------------------------*/
-
-  /*  @Override
-    public List<BillDto> findByTreatment(String prefix) {
-
-
-        return repository.findByTreatmentName(prefix);
-
-    }*/
 
 
 

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Date;
+
 import java.time.LocalDate;
 
 public class BillTests {
@@ -22,14 +22,14 @@ public class BillTests {
     @Test
     void testObjectGettersSetters() {
         var abc = new Bill();
-        abc.setBillAmt(100L);
+        abc.setBillAmt(10L);
         abc.setBillPaidDt(LocalDate.of(2021,1,1));
         abc.setPatientName("abc");
         abc.setId(10L);
 
         Assertions.assertEquals(10, abc.getBillAmt());
         Assertions.assertEquals(
-                Date.valueOf(LocalDate.of(2021,1,1)),
+                LocalDate.of(2021,1,1),
                 abc.getBillPaidDt()
         );
         Assertions.assertEquals("abc", abc.getPatientName());
