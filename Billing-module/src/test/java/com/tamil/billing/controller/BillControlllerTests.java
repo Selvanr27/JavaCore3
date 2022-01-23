@@ -45,8 +45,6 @@ public class BillControlllerTests {
         given(service.addBills(bill)).willReturn(bill);
 
        // mvc.perform(post("/billing")).
-
-
                 mvc.perform(
                         MockMvcRequestBuilders.get("/billing")
                 ).andExpect(
