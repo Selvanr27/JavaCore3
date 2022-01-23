@@ -16,7 +16,7 @@ import java.time.LocalDate;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class BillServiceTests {
+public class BillingServiceTests {
 
     @Mock
     private BillRepository repository;
@@ -24,7 +24,7 @@ public class BillServiceTests {
     private BillService service;
 
     @Test
-   public void whenSaveBill_shouldBeReturnBill(){
+    public void whenSaveBill_shouldBeReturnBill(){
         BillDto bill=new BillDto();
         bill.setId(1l);
         bill.setPatientName("tester");
@@ -34,16 +34,15 @@ public class BillServiceTests {
         bill.setBillSts(false);
         bill.setBillAmt(2000l);
 
-        //mocikto.when(repository.
 
-                var apps = service.getAllBills(); // you called the function 1 time
+        //mocikto.when(repository.
+        var apps = service.getAllBills();
         Assertions.assertEquals(apps.size(), 2);
 
-        // I want to make sure, actually repository method has called
-        // so that I am verifying it
+
         Mockito.verify(
                 repository,
-                Mockito.times(1) // function should be called 1 times
+                Mockito.times(1)
         );
 
 

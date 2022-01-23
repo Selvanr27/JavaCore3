@@ -3,6 +3,7 @@ import com.sun.istack.NotNull;
 import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 @Data
 @Entity
@@ -14,7 +15,7 @@ public class Bill {
     private  long id;
 
     @NotNull
-    @NotBlank
+    @NotBlank(message = "Patient Name Required")
     @Column(unique = true,nullable = false)
     private String patientName;
 
@@ -23,7 +24,7 @@ public class Bill {
     private LocalDate billDt;
 
     @NotNull
-    @NotBlank
+    @NotEmpty(message = "Treatment Name Required")
     @Column(unique = false,nullable = false)
     private String billTreatment;
 

@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(BillController.class)
 
-public class BillControlllerTests {
+public class BillControllerTests {
 
     @MockBean
     private BillService service;
@@ -44,17 +44,18 @@ public class BillControlllerTests {
 
         given(service.addBills(bill)).willReturn(bill);
 
-       // mvc.perform(post("/billing")).
-                mvc.perform(
-                        MockMvcRequestBuilders.get("/billing")
-                ).andExpect(
-                        MockMvcResultMatchers.status().isOk()
-                ).andExpect(
-                        MockMvcResultMatchers.jsonPath(
-                                "$[0].patientName", // in the json there is list, you point to 0 element
-                                Matchers.is("tester")
-                        )
-                );
+        // mvc.perform(post("/billing")).
+        mvc.perform(
+                MockMvcRequestBuilders.get("/billing")
+        ).andExpect(
+                MockMvcResultMatchers.status().isOk()
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath(
+                        "$[0].patientName", // in the json there is list, you point to 0 element
+                        Matchers.is("tester")
+                )
+        );
 
     }
 }
+
