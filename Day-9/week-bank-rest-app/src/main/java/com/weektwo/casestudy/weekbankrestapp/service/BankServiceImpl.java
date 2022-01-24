@@ -15,6 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+
+import static org.apache.naming.SelectorContext.prefix;
+
 //@Transactional annotation is used when you want the certain method/class(=all methods inside) to be executed in a transaction.
 @Transactional(
         isolation = Isolation.READ_UNCOMMITTED,
@@ -148,43 +151,45 @@ public class BankServiceImpl implements BankService{
         return baNew.getBalance();
     }
 
-    @Override
-    public double transferMoney(Long acNum, Long acNum2, double amt) throws InvalidAmountException {
-        if (amt <= 0) throw new InvalidAmountException("Amount Should be Non Zero Positive " + amt);
-        Optional<BankAccount> op = repository.findById(acNum);
-        BankAccount baOld = op.orElseThrow();
-        double existingBalance = baOld.getBalance();
-        Boolean existingStatus = baOld.getStatus();
-        if (existingStatus != true) {
-            return 0;
-        } else {
-            double newBalance = existingBalance - amt;
-            BankAccount baNew = new BankAccount();
-            baNew.setBalance(newBalance);
-            baNew.setAcCrDt(baOld.getAcCrDt());
-            baNew.setStatus(baOld.getStatus());
-            baNew.setAcHldNm(baOld.getAcHldNm());
-            baNew.setAcNum(baOld.getAcNum());
-            repository.save(baNew);
-            Optional<BankAccount> op2 = repository.findById(acNum2);
-            BankAccount baOld2 = op2.orElseThrow();
-            double existingBalance2 = baOld2.getBalance();
-            Boolean existingStatus1 = baOld2.getStatus();
-            if (existingStatus1 != true) {
-                return 0;
-            } else {
-                double newBalance2 = existingBalance2 + amt;
-                BankAccount baNew2 = new BankAccount();
-                baNew2.setBalance(newBalance2);
-                baNew2.setAcCrDt(baOld2.getAcCrDt());
-                baNew2.setStatus(baOld2.getStatus());
-                baNew2.setAcHldNm(baOld2.getAcHldNm());
-                baNew2.setAcNum(baOld2.getAcNum());
-                repository.save(baNew2);
-                return baNew2.getBalance();
-            }
-        }
 
+
+   @Override
+    public double transferMoney(Long acNum, Long acNum2, double amt) throws InvalidAmountException {
+       if (amt <= 0) throw new InvalidAmountException("Amount Should be Non Zero Positive " + amt);
+       Optional<BankAccount> op = repository.findById(acNum);
+       BankAccount baOld = op.orElseThrow();
+       double existingBalance = baOld.getBalance();
+       Boolean existingStatus = baOld.getStatus();
+       if (existingStatus != true) {
+           return 0;
+       } else {
+           double newBalance = existingBalance - amt;
+           BankAccount baNew = new BankAccount();
+           baNew.setBalance(newBalance);
+           baNew.setAcCrDt(baOld.getAcCrDt());
+           baNew.setStatus(baOld.getStatus());
+           baNew.setAcHldNm(baOld.getAcHldNm());
+           baNew.setAcNum(baOld.getAcNum());
+           repository.save(baNew);
+           Optional<BankAccount> op2 = repository.findById(acNum2);
+           BankAccount baOld2 = op2.orElseThrow();
+           double existingBalance2 = baOld2.getBalance();
+           Boolean existingStatus1 = baOld2.getStatus();
+           if (existingStatus1 != true) {
+               return 0;
+           } else {
+               double newBalance2 = existingBalance2 + amt;
+               BankAccount baNew2 = new BankAccount();
+               baNew2.setBalance(newBalance2);
+               baNew2.setAcCrDt(baOld2.getAcCrDt());
+               baNew2.setStatus(baOld2.getStatus());
+               baNew2.setAcHldNm(baOld2.getAcHldNm());
+               baNew2.setAcNum(baOld2.getAcNum());
+               repository.save(baNew2);
+               return baNew2.getBalance();
+           }
+       }
+   }
     @Override
     public List<BankAccount> findAccountByAcNum(Long acNum) {
 

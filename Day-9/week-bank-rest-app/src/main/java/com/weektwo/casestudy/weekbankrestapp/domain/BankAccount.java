@@ -14,6 +14,16 @@ public class BankAccount {
     private Boolean status;
     private Date acCrDt;
 
+    public Long getAcNum2() {
+        return acNum2;
+    }
+
+    public void setAcNum2(Long acNum2) {
+        this.acNum2 = acNum2;
+    }
+
+    private Long acNum2;
+
 
     public Long getAcNum() {
         return acNum;
@@ -54,4 +64,5 @@ public class BankAccount {
     public void setAcCrDt(Date acCrDt) {
         this.acCrDt = acCrDt;
     }
+
 }
