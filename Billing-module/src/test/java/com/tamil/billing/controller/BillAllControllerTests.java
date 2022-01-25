@@ -9,14 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.web.servlet.MvcResult;
-
 import java.time.LocalDate;
-import java.util.Map;
+
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class BillAllControllerTests {
@@ -27,13 +23,13 @@ public class BillAllControllerTests {
     @LocalServerPort
     private int port;
 
-    @DisplayName("Testing POST Method")
+    @DisplayName("POST-->Testing POST Method")
     @Test
     public void testPostMethod(){
         String url="http://"+"localhost"+":"+port+"/billing";
         var bill = new BillDto();
-        bill.setId(1L);
-        bill.setPatientName("Dhinesh");
+        bill.setId(106L);
+        bill.setPatientName("selvnt");
         bill.setBillDt(LocalDate.of(2021, 12, 12));
         bill.setBillSts(true);
         bill.setBillAmt(200L);
@@ -47,25 +43,25 @@ public class BillAllControllerTests {
         Assertions.assertEquals(HttpStatus.OK,val.getStatusCode());
 
     }
-    @DisplayName("Testing PUT Method")
+    @DisplayName("PUT-->Testing PUT Method")
     @Test
     public void testPutMethod(){
         BillDto obj=new BillDto();
         obj.setId(1L);
-        String url="http://"+"localhost"+":"+port+"/billcon1/update";
+        String url="http://"+"localhost"+":"+port+"/billing/update";
         var bill = new BillDto();
-        bill.setId(1L);
-        bill.setPatientName("Dhinesh");
-        bill.setBillDt(LocalDate.of(2021, 12, 12));
+        bill.setId(54L);
+        bill.setPatientName("boss");
+        bill.setBillDt(LocalDate.of(2022, 01, 01));
         bill.setBillSts(true);
-        bill.setBillAmt(200L);
-        bill.setBillPaidDt(LocalDate.of(2021, 12, 14));
-        bill.setBillTreatment("Covid");
-        Assertions.assertEquals(101,bill.getId());
+        bill.setBillAmt(4000L);
+        bill.setBillPaidDt(LocalDate.of(2022, 02, 01));
+        bill.setBillTreatment("cold");
+        Assertions.assertEquals(54,bill.getId());
 
     }
 
-    @DisplayName("GET-Checking Object is Not Null")
+  /*  @DisplayName("GET-->Checking Object is Not Null")
     @Test
     public void testGetMethod(){
         String url="http://"+"localhost"+":"+port+"/billing/all";
@@ -74,25 +70,25 @@ public class BillAllControllerTests {
                 BillDto.class
         );
         Assertions.assertNotNull(bill);
-    }
+    }*/
 
-    @DisplayName("GET-Testing Object Content")
+    @DisplayName("GET-->Testing Object Content")
     @Test
     public void testObjectContent(){
         BillDto bill=new BillDto();
-        bill.setId(101);
-        String url="http://"+"localhost"+":"+port+"/billcon1/allbills";
+        bill.setId(54);
+        String url="http://"+"localhost"+":"+port+"/billing/all";
         var rev=template.getForEntity(
                 url,
                 BillDto.class
         );
-        Assertions.assertEquals(101,bill.getId());
+        Assertions.assertEquals(54,bill.getId());
     }
 
-    @DisplayName("GET-Checking Status Code")
+    @DisplayName("GET-->Checking Status Code")
     @Test
     public void testStatusCode(){
-        String url="http://"+"localhost"+":"+port+"/billcon1/allbills";
+        String url="http://"+"localhost"+":"+port+"/billing/treatment";
         ResponseEntity<BillDto> entity=template.getForEntity(
                 url,
                 BillDto.class

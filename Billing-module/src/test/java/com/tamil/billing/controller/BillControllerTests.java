@@ -33,7 +33,7 @@
             @MockBean
             private BillService service;
 
-            @DisplayName("Controller1: Checking Status")
+            @DisplayName("Controller--> Checking Status")
             @Test
             public void testAppControllerStatus() throws Exception{
                 mockMvc.perform(

@@ -15,19 +15,19 @@ import java.util.List;
 @ExtendWith(SpringExtension.class)
 public class BillServiceImplTests {
 
-    @DisplayName("Testing Account Creation Method")
+    @DisplayName("Testing Creation Method")
     @Test
     public void testCreateBill() {
         Bill bill = new Bill();
-        bill.setId(1L);
-        bill.setPatientName("Dhinesh");
+        bill.setId(11L);
+        bill.setPatientName("selvan");
         bill.setBillDt(LocalDate.of(2021, 12, 12));
         bill.setBillSts(true);
         bill.setBillAmt(200L);
         bill.setBillPaidDt(LocalDate.of(2021, 12, 14));
         bill.setBillTreatment("Covid");
-        Assertions.assertEquals(1, bill.getId());
-        Assertions.assertEquals("Dhinesh", bill.getPatientName());
+        Assertions.assertEquals(11, bill.getId());
+        Assertions.assertEquals("selvan", bill.getPatientName());
         Assertions.assertEquals(LocalDate.of(2021, 12, 12), bill.getBillDt());
         Assertions.assertEquals(true, bill.getBillSts());
         Assertions.assertEquals(LocalDate.of(2021, 12, 14), bill.getBillPaidDt());
@@ -52,8 +52,8 @@ public class BillServiceImplTests {
         List<BillDto> bills = new ArrayList<>();
         for (int i = 0; i < object.size(); i++) {
             Bill bill = object.get(i);
-            bill.setId(1L);
-            bill.setPatientName("Dhinesh");
+            bill.setId(11L);
+            bill.setPatientName("selvan");
             bill.setBillDt(LocalDate.of(2021, 12, 12));
             bill.setBillSts(true);
             bill.setBillAmt(200L);
@@ -78,15 +78,15 @@ public class BillServiceImplTests {
     @Test
     public void testUpdateMethod() {
         BillDto obj = new BillDto();
-        obj.setId(42);
+        obj.setId(54);
         var bill = new BillDto();
-        bill.setId(1L);
-        bill.setPatientName("Dhinesh");
-        bill.setBillDt(LocalDate.of(2021, 12, 12));
+        bill.setId(54L);
+        bill.setPatientName("boss");
+        bill.setBillDt(LocalDate.of(2022, 01, 01));
         bill.setBillSts(true);
         bill.setBillAmt(200L);
-        bill.setBillPaidDt(LocalDate.of(2021, 12, 14));
-        bill.setBillTreatment("Covid");
-        Assertions.assertEquals(78, bill.getId());
+        bill.setBillPaidDt(LocalDate.of(2022, 02, 01));
+        bill.setBillTreatment("cold");
+        Assertions.assertEquals(54, bill.getId());
     }
 }
