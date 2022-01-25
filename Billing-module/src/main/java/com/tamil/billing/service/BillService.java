@@ -11,7 +11,7 @@ import java.util.Map;
 public interface BillService {
  //   Bill addBills(Bill bl);
 
-    /*--------------------------<Create Bills>-----------------------------------------*/
+
 
     public BillDto addBills(BillDto dto);
 
@@ -26,7 +26,7 @@ public interface BillService {
 
    //   List<BillDto> findByUnpaidBill(String billTreatment);
 
-    /*-----------------------------<Mark Bill As Paid>-------------------------------*/
+
     boolean paidBill(Long id);
 
     BillDto updateBill(BillDto dto) throws InvalidIdException;
