@@ -1,16 +1,5 @@
-
-
-       /* bill.setId(1l);
-        bill.setPatientName("tester");
-        bill.setBillDt(LocalDate.now());
-        bill.setBillTreatment("cardiac");
-        bill.setBillPaidDt(LocalDate.now());
-        bill.setBillSts(false);
-        bill.setBillAmt(2000l);*/
-       package com.tamil.billing.controller;
-
-
-        import com.tamil.billing.service.BillService;
+package com.tamil.billing.controller;
+import com.tamil.billing.service.BillService;
         import org.junit.jupiter.api.DisplayName;
         import org.junit.jupiter.api.Test;
         import org.junit.jupiter.api.extension.ExtendWith;

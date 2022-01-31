@@ -14,8 +14,7 @@ public class Bill {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private  long id;
 
-    @NotNull
-    @NotBlank(message = "Patient Name Required")
+
     @Column(unique = true,nullable = false)
     private String patientName;
 
@@ -23,8 +22,7 @@ public class Bill {
     @Column(unique = false,nullable = true)
     private LocalDate billDt;
 
-    @NotNull
-    @NotEmpty(message = "Treatment Name Required")
+
     @Column(unique = false,nullable = false)
     private String billTreatment;
 

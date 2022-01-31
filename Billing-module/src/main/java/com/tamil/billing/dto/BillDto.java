@@ -1,12 +1,16 @@
 package com.tamil.billing.dto;
 
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 //import java.sql.Date;
 
+import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 //import java.util.Date;
 @NoArgsConstructor
@@ -16,10 +20,22 @@ import java.time.LocalDate;
 
 public class BillDto {
     private  long id;
+
+    @NotNull
+    @NotBlank(message = "Patient Name Required")
+    @Column(unique = true,nullable = false)
     private String patientName;
+
     private LocalDate billDt;
+
+    @NotNull
+    @NotEmpty(message = "Treatment Name Required")
+    @Column(unique = false,nullable = false)
     private String billTreatment;
+
     private LocalDate billPaidDt;
+
     private Boolean billSts;
+
     private Long billAmt;
 }

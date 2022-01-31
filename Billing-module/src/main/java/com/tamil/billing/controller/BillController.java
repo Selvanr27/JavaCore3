@@ -7,8 +7,13 @@ import com.tamil.billing.service.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +28,7 @@ public class BillController {
 
 
     @PostMapping()
-    public ResponseEntity<AppResponse<BillDto>> addBills(@RequestBody BillDto dto) {
+    public ResponseEntity<AppResponse<BillDto>> addBills(@Valid  @RequestBody BillDto dto) {
 
         var svObj = service.addBills(dto);
         var response = new AppResponse<BillDto>();
@@ -76,7 +81,7 @@ public ResponseEntity<AppResponse<List<Map<String,Integer>>>>findTreatmentWise()
     /*--------------------------Update All Bills-----------------------------------------*/
 
     @PutMapping("/update")
-    public ResponseEntity<AppResponse<BillDto>>updateBills(@RequestBody BillDto dto) {
+    public ResponseEntity<AppResponse<BillDto>>updateBills(@Valid @RequestBody BillDto dto) {
 
    var upBill=service.updateBill(dto);
         var response = new AppResponse<BillDto>();
@@ -112,6 +117,26 @@ public ResponseEntity<AppResponse<List<Map<String,Integer>>>>findTreatmentWise()
             response.setBody(response.getBody());
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
+    }
+
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({MethodArgumentNotValidException.class})
+    public Map<String, String> handleExceptions(MethodArgumentNotValidException ex) {
+        Map<String, String> messages = new HashMap<>();
+
+        List<ObjectError> errors = ex.getBindingResult().getAllErrors();
+
+        for (ObjectError obj1 : errors) {
+            FieldError field1 = (FieldError) obj1;
+
+            String errorField = field1.getField();
+            String errorMessage = field1.getDefaultMessage();
+
+            messages.put(errorField, errorMessage);
+        }
+
+        return messages;
     }
 
 }
