@@ -40,6 +40,7 @@ import com.tamil.billing.dto.BillDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -69,5 +70,8 @@ List<Map<String,Integer>>findTreatmentWiseRepo();
    /* @Modifying
     @Query(value = "update bill4 set billAmt,billPaidDt,billSts where id=:Id",nativeQuery = true)
     Optional<Bill> updateBillDetails(@Param("Id") Long Id);*/
+
+    @Query(value = "select * from bill4 where patient_name = :patientName", nativeQuery = true)
+    List<Bill> findByNameStarting(@Param("patientName") String patientName);
 
 }

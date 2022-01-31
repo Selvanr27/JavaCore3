@@ -35,6 +35,7 @@ public interface BillService {
 
     List<Map<String, Integer>> findTreatmentWiseAmount();
 
+    List<BillDto> billsFindByName(String name);
 
 
 //    List<BillDto> billStartsWith(String prefix);

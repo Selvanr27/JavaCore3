@@ -119,6 +119,23 @@ public ResponseEntity<AppResponse<List<Map<String,Integer>>>>findTreatmentWise()
         }
     }
 
+    @GetMapping("/findbyname/{name}")
+    public ResponseEntity<AppResponse<List<BillDto>>> billsFindByName(@PathVariable String name) {
+        try {
+            var response = new AppResponse<List<BillDto>>();
+            response.setBody(service.billsFindByName(name));
+            response.setMessage("  Sucessfully Name By Bills Shown");
+            response.setStatus("Success");
+            return ResponseEntity.ok(response);
+        } catch (InvalidNameException e) {
+            var response = new AppResponse<Boolean>();
+            response.setBody(false);
+            response.setMessage(e.getMessage());
+            response.setStatus("Failed");
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({MethodArgumentNotValidException.class})

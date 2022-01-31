@@ -7,6 +7,8 @@ import com.tamil.billing.repository.BillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.naming.InvalidNameException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -92,6 +94,34 @@ public BillDto updateBill(BillDto dto) throws InvalidIdException{
     public List <Map<String,Integer>>findTreatmentWiseAmount(){
        return repository.findTreatmentWiseRepo();
    }
+
+    @Override
+    public List<BillDto> billsFindByName(String name) {
+        var object = repository.findByNameStarting(name);
+        if (object.isEmpty()) {
+            try {
+                throw new InvalidNameException("Bills Not Found Searched By this Name : " + name);
+            } catch (InvalidNameException e) {
+                e.printStackTrace();
+            }
+        }
+
+        List<BillDto> bills = new ArrayList<>();
+        for (int i = 0; i < object.size(); i++) {
+            Bill bill = object.get(i);
+            BillDto obj = new BillDto(
+                    bill.getId(),
+                    bill.getPatientName(),
+                    bill.getBillDt(),
+                    bill.getBillTreatment(),
+                    bill.getBillPaidDt(),
+                    bill.getBillSts(),
+                    bill.getBillAmt()
+            );
+            bills.add(obj);
+        }
+        return bills;
+    }
 
 }
 
