@@ -9,6 +9,8 @@ import lombok.Setter;
 //import java.sql.Date;
 
 import javax.persistence.Column;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
@@ -37,5 +39,9 @@ public class BillDto {
 
     private Boolean billSts;
 
+
+    @Min(100)
+    @Max(10000)
+    @Column(unique = false,nullable = true)
     private Long billAmt;
 }
