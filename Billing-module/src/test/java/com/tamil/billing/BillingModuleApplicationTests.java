@@ -13,7 +13,7 @@ class BillingModuleApplicationTests {
 	private BillController controller;
 
 
-	@DisplayName("Context 1 : Spring Application Context Loaded")
+	@DisplayName("Context  : Spring Application Context Loaded")
 	@Test
 	void contextLoads() {
 		Assertions.assertNotNull(controller);

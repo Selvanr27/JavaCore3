@@ -30,20 +30,21 @@ public class BillController {
     @PostMapping()
     public ResponseEntity<AppResponse<BillDto>> addBills(@Valid  @RequestBody BillDto dto) {
 
-        var svObj = service.addBills(dto);
-        var response = new AppResponse<BillDto>();
 
         try {
+
+            var svObj = service.addBills(dto);
+            var response = new AppResponse<BillDto>();
 
             response.setStatus("success");
             response.setMessage("Saved successfully");
             response.setBody(svObj);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }catch (InvalidBillException e) {
-
+            var response = new AppResponse<BillDto>();
             response.setMessage(e.getMessage());
             response.setStatus("fail");
-            response.setBody(svObj);
+            response.setBody(null);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
         }
@@ -61,14 +62,16 @@ public class BillController {
     /*--------------------------Show TreatmentWise Bill-----------------------------------------*/
 @GetMapping("/treatment")
 public ResponseEntity<AppResponse<List<Map<String,Integer>>>>findTreatmentWise(){
-    var response=new AppResponse<List<Map<String,Integer>>>();
+
     try{
+        var response=new AppResponse<List<Map<String,Integer>>>();
         response.setMessage("Treatment wise Amount");
         response.setStatus("Success");
         response.setBody(service.findTreatmentWiseAmount());
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }catch(InvalidAmtException e){
+        var response=new AppResponse<List<Map<String,Integer>>>();
         response.setMessage(e.getMessage());
         response.setStatus("Fail");
         response.setBody(response.getBody());
@@ -83,60 +86,64 @@ public ResponseEntity<AppResponse<List<Map<String,Integer>>>>findTreatmentWise()
     @PutMapping("/update")
     public ResponseEntity<AppResponse<BillDto>>updateBills(@Valid @RequestBody BillDto dto) {
 
-   var upBill=service.updateBill(dto);
-        var response = new AppResponse<BillDto>();
+
+
         try {
-
-
+            var upBill=service.updateBill(dto);
+            var response = new AppResponse<BillDto>();
             response.setMessage("Bill Updated Successfully");
             response.setStatus("Success");
             response.setBody(upBill);
             return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
         } catch (InvalidUpdateException e) {
-
+            var response = new AppResponse<BillDto>();
             response.setMessage(e.getMessage());
-            response.setStatus("Fail");
-            response.setBody(response.getBody());
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+            response.setStatus("Failiure");
+           response.setBody(response.getBody());
+            return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
         }
     }
 /*-----------------------------<Mark Bill As Paid>-------------------------------*/
     @PutMapping("/{Id}")
     public ResponseEntity<AppResponse<Boolean>>paidBill(@PathVariable Long Id){
-        boolean paidBill=service.paidBill(Id);
-        var response=new AppResponse<Boolean>();
-        try{
 
+
+        try{
+            boolean paidBill=service.paidBill(Id);
+            var response=new AppResponse<Boolean>();
             response.setMessage("Successfully");
             response.setStatus("Success");
             response.setBody(paidBill);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }catch(InvalidIdException e){
+            var response=new AppResponse<Boolean>();
             response.setMessage(e.getMessage());
             response.setStatus("Fail");
             response.setBody(response.getBody());
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
+
+    /*--------------------------------<Bills By Name>-------------------------------*/
 
     @GetMapping("/findbyname/{name}")
     public ResponseEntity<AppResponse<List<BillDto>>> billsFindByName(@PathVariable String name) {
         try {
             var response = new AppResponse<List<BillDto>>();
             response.setBody(service.billsFindByName(name));
-            response.setMessage("  Sucessfully Name By Bills Shown");
+            response.setMessage("Sucessfully Name By Bills Shown");
             response.setStatus("Success");
             return ResponseEntity.ok(response);
         } catch (InvalidNameException e) {
-            var response = new AppResponse<Boolean>();
-            response.setBody(false);
+            var response = new AppResponse<BillDto>();
+            response.setBody(response.getBody());
             response.setMessage(e.getMessage());
             response.setStatus("Failed");
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
 
-
+/*---------------------------< Validation Test >----------------------------*/
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public Map<String, String> handleExceptions(MethodArgumentNotValidException ex) {

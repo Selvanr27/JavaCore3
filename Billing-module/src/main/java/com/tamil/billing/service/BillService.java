@@ -3,29 +3,19 @@ package com.tamil.billing.service;
 
 import com.tamil.billing.domain.Bill;
 import com.tamil.billing.dto.BillDto;
+import com.tamil.billing.exception.InvalidAmtException;
+import com.tamil.billing.exception.InvalidBillException;
 import com.tamil.billing.exception.InvalidIdException;
 
 import java.util.List;
 import java.util.Map;
 
 public interface BillService {
- //   Bill addBills(Bill bl);
 
 
 
-    public BillDto addBills(BillDto dto);
 
-   //public ResponseEntity<AppResponse<BillDto>> getAllBills();
-
-
-  //  public BillDto (BillDto billDto);
-
-   // List<BillDto>findByTreatment(String prefix);
-
-   // Long billUpdate(Long Id, Long billAmt) throws InvalidUpdateException;
-
-   //   List<BillDto> findByUnpaidBill(String billTreatment);
-
+    public BillDto addBills(BillDto dto) throws InvalidBillException;
 
     boolean paidBill(Long id);
 
@@ -33,10 +23,9 @@ public interface BillService {
 
     List<Bill> getAllBills();
 
-    List<Map<String, Integer>> findTreatmentWiseAmount();
+    List<Map<String, Integer>> findTreatmentWiseAmount() throws InvalidAmtException;
 
     List<BillDto> billsFindByName(String name);
 
 
-//    List<BillDto> billStartsWith(String prefix);
 }

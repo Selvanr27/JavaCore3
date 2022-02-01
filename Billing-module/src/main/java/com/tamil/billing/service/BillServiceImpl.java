@@ -2,12 +2,11 @@ package com.tamil.billing.service;
 
 import com.tamil.billing.domain.Bill;
 import com.tamil.billing.dto.BillDto;
-import com.tamil.billing.exception.InvalidIdException;
+import com.tamil.billing.exception.*;
 import com.tamil.billing.repository.BillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.naming.InvalidNameException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +22,7 @@ public class BillServiceImpl implements BillService {
 
 
     @Override
-    public BillDto addBills(BillDto dto) {
+    public BillDto addBills(BillDto dto) throws InvalidBillException {
 
         var bill = new Bill();
         bill.setId(dto.getId());
@@ -52,7 +51,7 @@ public class BillServiceImpl implements BillService {
 
 @Override
 public BillDto updateBill(BillDto dto) throws InvalidIdException{
-    Bill bill2=repository.findById(dto.getId()).orElseThrow(()->new InvalidIdException("Invalid Id"));
+    Bill bill2=repository.findById(dto.getId()).orElseThrow(()->new InvalidUpdateException("Invalid ID"));
     var bill3=new Bill();
 
     bill3.setId(dto.getId());
@@ -91,20 +90,27 @@ public BillDto updateBill(BillDto dto) throws InvalidIdException{
     /*--------------------------------<Treatment Wise Bill>-------------------------------*/
 
    @Override
-    public List <Map<String,Integer>>findTreatmentWiseAmount(){
+    public List <Map<String,Integer>>findTreatmentWiseAmount() throws InvalidAmtException {
+
        return repository.findTreatmentWiseRepo();
    }
 
+    /*--------------------------------<Bills By Name>-------------------------------*/
+
     @Override
-    public List<BillDto> billsFindByName(String name) {
+    public List<BillDto> billsFindByName(String name) throws InvalidNameException {
         var object = repository.findByNameStarting(name);
-        if (object.isEmpty()) {
+       /* if (object.isEmpty()) {
             try {
                 throw new InvalidNameException("Bills Not Found Searched By this Name : " + name);
             } catch (InvalidNameException e) {
                 e.printStackTrace();
             }
+        }*/
+           if (object.isEmpty()) {
+            throw new InvalidNameException("Bills Not Found Searched By this Name : " + name) ;
         }
+
 
         List<BillDto> bills = new ArrayList<>();
         for (int i = 0; i < object.size(); i++) {
