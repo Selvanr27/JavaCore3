@@ -6,11 +6,23 @@ import com.tamil.billing.exception.*;
 import com.tamil.billing.repository.BillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+
+//@Transactional annotation is used when you want the certain method/class(=all methods inside) to be executed in a transaction.
+@Transactional(
+        isolation = Isolation.READ_UNCOMMITTED,
+        rollbackFor = SQLException.class,
+        noRollbackFor = InvalidAmtException.class
+)
+
 
 @Service
 public class BillServiceImpl implements BillService {

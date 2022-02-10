@@ -136,10 +136,11 @@ public ResponseEntity<AppResponse<List<Map<String,Integer>>>>findTreatmentWise()
             return ResponseEntity.ok(response);
         } catch (InvalidNameException e) {
             var response = new AppResponse<BillDto>();
-            response.setBody(response.getBody());
+
             response.setMessage(e.getMessage());
             response.setStatus("Failed");
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            response.setBody(response.getBody());
+            return new ResponseEntity(response,HttpStatus.BAD_REQUEST);
         }
     }
 

@@ -37,6 +37,7 @@ public interface BillRepository extends JpaRepository<Bill, Long> {
 
 import com.tamil.billing.domain.Bill;
 import com.tamil.billing.dto.BillDto;
+import com.tamil.billing.exception.InvalidNameException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -49,29 +50,13 @@ import java.util.Map;
 @Repository
 public interface BillRepository extends JpaRepository<Bill, Long> {
 
-    //List<Bill> getAllBills();
-
-/*@Modifying
-@Query(value = "select u.Id from bill4 u where u.bill_treatment=?1",nativeQuery = true)
-List<BillDto> findByTreatmentName(String billTreatment);*/
 
 
 @Query(value = "select bill_treatment,sum(bill_amt) from bill4 group by bill_treatment",nativeQuery = true)
 List<Map<String,Integer>>findTreatmentWiseRepo();
 
-    //  List<BillDto> findByTreatmentNameWith(String prefix);
-
-/*@Modifying
-    @Query(value = "update bill4 set bill_amt=:billAmt where id=:Id",nativeQuery = true)
-    void updateBillDetails(@Param("billAmt") Long billAmt,@Param("Id") Long Id);*/
-
- //   List<Bill>egtAllBillsDetails();
-
-   /* @Modifying
-    @Query(value = "update bill4 set billAmt,billPaidDt,billSts where id=:Id",nativeQuery = true)
-    Optional<Bill> updateBillDetails(@Param("Id") Long Id);*/
 
     @Query(value = "select * from bill4 where patient_name = :patientName", nativeQuery = true)
-    List<Bill> findByNameStarting(@Param("patientName") String patientName);
+    List<Bill> findByNameStarting(@Param("patientName") String patientName) throws InvalidNameException;
 
 }
