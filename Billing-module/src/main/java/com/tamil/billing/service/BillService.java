@@ -4,7 +4,7 @@ package com.tamil.billing.service;
 import com.tamil.billing.domain.Bill;
 import com.tamil.billing.dto.BillDto;
 import com.tamil.billing.exception.InvalidAmtException;
-import com.tamil.billing.exception.InvalidBillException;
+import com.tamil.billing.exception.InvalidDateException;
 import com.tamil.billing.exception.InvalidIdException;
 import com.tamil.billing.exception.InvalidNameException;
 
@@ -16,7 +16,7 @@ public interface BillService {
 
 
 
-    public BillDto addBills(BillDto dto) throws InvalidBillException;
+    public BillDto addBills(BillDto dto) ;
 
     boolean paidBill(Long id);
 
@@ -29,4 +29,5 @@ public interface BillService {
     List<BillDto> billsFindByName(String name) throws InvalidNameException;
 
 
+    List<BillDto> billsFindByDates(String date) throws InvalidDateException;
 }

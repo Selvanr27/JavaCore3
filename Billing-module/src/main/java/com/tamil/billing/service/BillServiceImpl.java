@@ -34,7 +34,7 @@ public class BillServiceImpl implements BillService {
 
 
     @Override
-    public BillDto addBills(BillDto dto) throws InvalidBillException {
+    public BillDto addBills(BillDto dto)  {
 
         var bill = new Bill();
         bill.setId(dto.getId());
@@ -112,18 +112,9 @@ public BillDto updateBill(BillDto dto) throws InvalidIdException{
     @Override
     public List<BillDto> billsFindByName(String name) throws InvalidNameException {
         var object = repository.findByNameStarting(name);
-       /* if (object.isEmpty()) {
-            try {
-                throw new InvalidNameException("Bills Not Found Searched By this Name : " + name);
-            } catch (InvalidNameException e) {
-                e.printStackTrace();
-            }
-        }*/
-           if (object.isEmpty()) {
+        if (object.isEmpty()) {
             throw new InvalidNameException("Bills Not Found Searched By this Name : " + name) ;
         }
-
-
         List<BillDto> bills = new ArrayList<>();
         for (int i = 0; i < object.size(); i++) {
             Bill bill = object.get(i);
@@ -139,6 +130,30 @@ public BillDto updateBill(BillDto dto) throws InvalidIdException{
             bills.add(obj);
         }
         return bills;
+    }
+
+    @Override
+    public List<BillDto>billsFindByDates(String date){
+        var object = repository.findPaidBillsByDates(date);
+
+        List<BillDto> bills = new ArrayList<>();
+        for (int i = 0; i < object.size(); i++) {
+            Bill bill = object.get(i);
+            BillDto obj = new BillDto(
+                    bill.getId(),
+                    bill.getPatientName(),
+                    bill.getBillDt(),
+                    bill.getBillTreatment(),
+                    bill.getBillPaidDt(),
+                    bill.getBillSts(),
+                    bill.getBillAmt()
+            );
+            bills.add(obj);
+        }
+        boolean bool=bills.isEmpty();
+        if(bool==true) throw new InvalidDateException("Paid Bills Not Found Searched By this Date : " + date);
+        return bills;
+
     }
 
 }

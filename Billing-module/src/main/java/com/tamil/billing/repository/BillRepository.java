@@ -56,7 +56,9 @@ public interface BillRepository extends JpaRepository<Bill, Long> {
 List<Map<String,Integer>>findTreatmentWiseRepo();
 
 
-    @Query(value = "select * from bill4 where patient_name = :patientName", nativeQuery = true)
-    List<Bill> findByNameStarting(@Param("patientName") String patientName) throws InvalidNameException;
+@Query(value = "select * from bill4 where patient_name = :patientName", nativeQuery = true)
+List<Bill> findByNameStarting(@Param("patientName") String patientName) throws InvalidNameException;
 
+@Query(value="select * from bill4 where bill_sts=true and bill_paid_dt=:date ",nativeQuery = true)
+    List<Bill> findPaidBillsByDates(@Param("date") String date);
 }

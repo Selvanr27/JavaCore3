@@ -31,7 +31,7 @@ public class BillController {
     public ResponseEntity<AppResponse<BillDto>> addBills(@Valid  @RequestBody BillDto dto) {
 
 
-        try {
+
 
             var svObj = service.addBills(dto);
             var response = new AppResponse<BillDto>();
@@ -40,14 +40,7 @@ public class BillController {
             response.setMessage("Saved successfully");
             response.setBody(svObj);
             return new ResponseEntity<>(response, HttpStatus.OK);
-        }catch (InvalidBillException e) {
-            var response = new AppResponse<BillDto>();
-            response.setMessage(e.getMessage());
-            response.setStatus("fail");
-            response.setBody(null);
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
-        }
     }
 
     /*--------------------------Show All Bills-----------------------------------------*/
@@ -143,6 +136,27 @@ public ResponseEntity<AppResponse<List<Map<String,Integer>>>>findTreatmentWise()
             response.setMessage(e.getMessage());
             response.setStatus("Failed");
             response.setBody(response.getBody());
+            return new ResponseEntity(response,HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+    /*-----------------------< Find By Date >-----------------------------------------*/
+
+    @GetMapping("/findbydate/{date}")
+    public ResponseEntity<AppResponse<List<BillDto>>> billsFindByDate(@PathVariable String date) {
+        try {
+            var response = new AppResponse<List<BillDto>>();
+            response.setBody(service.billsFindByDates(date));
+            response.setMessage(" Paid Bills are Shown By Particular Date Sucessfully");
+            response.setStatus("Success");
+            return ResponseEntity.ok(response);
+        } catch (InvalidDateException e) {
+            //var response = new AppResponse<Boolean>();
+            var response = new AppResponse<List<BillDto>>();
+            response.setMessage(e.getMessage());
+            response.setStatus("Failed");
+            response.setBody(null);
             return new ResponseEntity(response,HttpStatus.BAD_REQUEST);
         }
     }
