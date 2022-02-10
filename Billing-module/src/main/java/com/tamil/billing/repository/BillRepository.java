@@ -61,4 +61,7 @@ List<Bill> findByNameStarting(@Param("patientName") String patientName) throws I
 
 @Query(value="select * from bill4 where bill_sts=true and bill_paid_dt=:date ",nativeQuery = true)
     List<Bill> findPaidBillsByDates(@Param("date") String date);
+
+@Query(value = "select * from bill4 where bill_amt>:amt",nativeQuery = true)
+    List<Bill> billAmountMoreThanGivenAmount(@Param("amt") double amt);
 }

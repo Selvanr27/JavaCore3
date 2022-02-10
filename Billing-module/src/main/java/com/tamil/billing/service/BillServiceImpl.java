@@ -20,7 +20,7 @@ import java.util.Optional;
 @Transactional(
         isolation = Isolation.READ_UNCOMMITTED,
         rollbackFor = SQLException.class,
-        noRollbackFor = InvalidAmtException.class
+        noRollbackFor = InvalidIdException.class
 )
 
 
@@ -132,6 +132,8 @@ public BillDto updateBill(BillDto dto) throws InvalidIdException{
         return bills;
     }
 
+    /*-----------------------< Find By Date >-----------------------------------------*/
+
     @Override
     public List<BillDto>billsFindByDates(String date){
         var object = repository.findPaidBillsByDates(date);
@@ -155,6 +157,33 @@ public BillDto updateBill(BillDto dto) throws InvalidIdException{
         return bills;
 
     }
+    /*-----------------------< given amount is more than 15000 >-----------------------------------------*/
+    @Override
+    public List<BillDto> billAmountMoreThanGivenAmount(double amt) {
+        var object = repository.billAmountMoreThanGivenAmount(amt);
+
+        List<BillDto> bills = new ArrayList<>();
+        for (int i = 0; i < object.size(); i++) {
+            Bill bill = object.get(i);
+            BillDto obj = new BillDto(
+                    bill.getId(),
+                    bill.getPatientName(),
+                    bill.getBillDt(),
+                    bill.getBillTreatment(),
+                    bill.getBillPaidDt(),
+                    bill.getBillSts(),
+                    bill.getBillAmt()
+
+            );
+            bills.add(obj);
+        }
+
+        boolean bool=bills.isEmpty();
+        if(bool==true)
+            throw new InvalidAmtException("Bills Not Found Searched By Amount : "+amt);
+        return bills;
+    }
+
 
 }
 

@@ -161,6 +161,25 @@ public ResponseEntity<AppResponse<List<Map<String,Integer>>>>findTreatmentWise()
         }
     }
 
+    /*-----------------------< given amount is more than 15000 >-----------------------------------------*/
+
+    @GetMapping("/search/{amt}")
+    public ResponseEntity<AppResponse<List<BillDto>>> billSearching(@PathVariable double amt) {
+        try {
+            var response = new AppResponse<List<BillDto>>();
+            response.setBody(service.billAmountMoreThanGivenAmount(amt));
+            response.setMessage("Bills are Shown By Amount More than "+ amt+" Sucessfully");
+            response.setStatus("Success");
+            return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+        } catch (InvalidAmtException e) {
+            var response = new AppResponse<Boolean>();
+            response.setMessage(e.getMessage());
+            response.setStatus("Failed");
+            response.setBody(false);
+            return new ResponseEntity(response,HttpStatus.BAD_REQUEST);
+        }
+    }
+
 /*---------------------------< Validation Test >----------------------------*/
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({MethodArgumentNotValidException.class})

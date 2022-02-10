@@ -30,4 +30,6 @@ public interface BillService {
 
 
     List<BillDto> billsFindByDates(String date) throws InvalidDateException;
+
+    List<BillDto> billAmountMoreThanGivenAmount(double amt) throws InvalidAmtException;
 }
