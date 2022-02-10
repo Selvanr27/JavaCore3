@@ -53,9 +53,12 @@ public class BillController {
     /*--------------------------Show All Bills-----------------------------------------*/
 
     @GetMapping("/all")
-    public List<Bill>findAll()
-    {
-        return service.getAllBills();
+    public ResponseEntity<AppResponse<List<Bill>>>findAll() {
+        var response=new AppResponse<List<Bill>>();
+        response.setBody(service.getAllBills());
+        response.setMessage("All Bills");
+        response.setStatus("Success");
+        return ResponseEntity.ok(response);
     }
 
 
